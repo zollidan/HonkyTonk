@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+  app:
+    image: "honkytonk:latest"
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/honkytonk
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  db:
+    image: "mysql:latest"
+    container_name: db
+    environment:
+      - MYSQL_PASSWORD=1234
+      - MYSQL_ROOT_PASSWORD=1234
